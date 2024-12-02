@@ -37,63 +37,63 @@ jobs:
 
           # Use Python to generate HTML using BOT_TOKEN secret
           python -c "
-            import os
-            import requests
+import os
+import requests
 
-            # Retrieve BOT_TOKEN from GitHub Secrets
-            bot_token = os.getenv('BOT_TOKEN')
-            url = f'https://api.telegram.org/bot{bot_token}/getMe'
+# Retrieve BOT_TOKEN from GitHub Secrets
+bot_token = os.getenv('BOT_TOKEN')
+url = f'https://api.telegram.org/bot{bot_token}/getMe'
 
-            # Make an API request to Telegram Bot API to fetch bot info
-            response = requests.get(url)
-            data = response.json()
+# Make an API request to Telegram Bot API to fetch bot info
+response = requests.get(url)
+data = response.json()
 
-            # Extract bot details from the response
-            bot_name = data.get('result', {}).get('username', 'Unknown Bot')
-            bot_id = data.get('result', {}).get('id', 'Unknown ID')
+# Extract bot details from the response
+bot_name = data.get('result', {}).get('username', 'Unknown Bot')
+bot_id = data.get('result', {}).get('id', 'Unknown ID')
 
-            # HTML content with bot details and basic commands explanation
-            html_content = f'''
-            <!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>{bot_name} - Telegram Bot</title>
-                <style>
-                    /* Your CSS styles here */
-                </style>
-            </head>
-            <body>
-                <div class='container'>
-                    <h1>{bot_name}</h1>
-                    <p class='details'>Bot ID: {bot_id}</p>
-                    <p class='details'>Telegram Bot: <a href='https://t.me/{bot_name}' target='_blank'>{bot_name}</a></p>
-                    
-                    <div class='commands'>
-                        <h3>Bot Commands</h3>
-                        <ul>
-                            <li><b>/start</b>: Start interacting with the bot</li>
-                            <li><b>/help</b>: Get help and instructions</li>
-                        </ul>
-                    </div>
+# HTML content with bot details and basic commands explanation
+html_content = f'''
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>{bot_name} - Telegram Bot</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>{bot_name}</h1>
+        <p class='details'>Bot ID: {bot_id}</p>
+        <p class='details'>Telegram Bot: <a href='https://t.me/{bot_name}' target='_blank'>{bot_name}</a></p>
+        
+        <div class='commands'>
+            <h3>Bot Commands</h3>
+            <ul>
+                <li><b>/start</b>: Start interacting with the bot</li>
+                <li><b>/help</b>: Get help and instructions</li>
+            </ul>
+        </div>
 
-                    <button class='btn' onclick='alert("This is a placeholder for bot interaction")'>Interact with Bot</button>
-                </div>
+        <button class='btn' onclick='alert(\"This is a placeholder for bot interaction\")'>Interact with Bot</button>
+    </div>
 
-                <div class='footer'>
-                    <p>Learn more about how Telegram bots work with HTML, CSS, and JS.</p>
-                </div>
-            </body>
-            </html>
-            '''
+    <div class='footer'>
+        <p>Learn more about how Telegram bots work with HTML, CSS, and JS.</p>
+    </div>
+</body>
+</html>
+'''
 
-            # Write the HTML content to index.html
-            with open('index.html', 'w') as file:
-                file.write(html_content)
+# Write the HTML content to index.html
+with open('index.html', 'w') as file:
+    file.write(html_content)
 
-            print('index.html has been generated and saved.')
-          "
+print('index.html has been generated and saved.')
+"
 
       # Step 5: Update README.md with Bot Info and Explanation of Bot Interaction
       - name: Update README.md with Bot Info and Commands
