@@ -1,4 +1,4 @@
-name: Telegram Bot with HTML, CSS, JS Integration, and README Generation
+name: Telegram Bot with HTML, CSS, JS Integration and README Generation
 
 on:
   push:
@@ -37,108 +37,64 @@ jobs:
 
           # Use Python to generate HTML using BOT_TOKEN secret
           python -c "
-import os
-import requests
+            import os
+            import requests
 
-# Retrieve BOT_TOKEN from GitHub Secrets
-bot_token = os.getenv('BOT_TOKEN')
-url = f'https://api.telegram.org/bot{bot_token}/getMe'
+            # Retrieve BOT_TOKEN from GitHub Secrets
+            bot_token = os.getenv('BOT_TOKEN')
+            url = f'https://api.telegram.org/bot{bot_token}/getMe'
 
-# Make an API request to Telegram Bot API to fetch bot info
-response = requests.get(url)
-data = response.json()
+            # Make an API request to Telegram Bot API to fetch bot info
+            response = requests.get(url)
+            data = response.json()
 
-# Extract bot details from the response
-bot_name = data.get('result', {}).get('username', 'Unknown Bot')
-bot_id = data.get('result', {}).get('id', 'Unknown ID')
+            # Extract bot details from the response
+            bot_name = data.get('result', {}).get('username', 'Unknown Bot')
+            bot_id = data.get('result', {}).get('id', 'Unknown ID')
 
-# HTML content with bot details and basic commands explanation
-html_content = f'''
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>{bot_name} - Telegram Bot</title>
-    <style>
-        body {{
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }}
-        h1 {{
-            color: #4CAF50;
-            margin-top: 20px;
-        }}
-        .container {{
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            border-radius: 8px;
-            width: 60%;
-            margin: 40px auto;
-        }}
-        .details {{
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }}
-        .commands {{
-            font-size: 1.1em;
-            margin-top: 20px;
-        }}
-        .btn {{
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-        }}
-        .btn:hover {{
-            background-color: #45a049;
-        }}
-        .footer {{
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #888;
-        }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>{bot_name}</h1>
-        <p class="details">Bot ID: {bot_id}</p>
-        <p class="details">Telegram Bot: <a href='https://t.me/{bot_name}' target='_blank'>{bot_name}</a></p>
-        
-        <div class="commands">
-            <h3>Bot Commands</h3>
-            <ul>
-                <li><b>/start</b>: Start interacting with the bot</li>
-                <li><b>/help</b>: Get help and instructions</li>
-            </ul>
-        </div>
+            # HTML content with bot details and basic commands explanation
+            html_content = f'''
+            <!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>{bot_name} - Telegram Bot</title>
+                <style>
+                    /* Your CSS styles here */
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <h1>{bot_name}</h1>
+                    <p class='details'>Bot ID: {bot_id}</p>
+                    <p class='details'>Telegram Bot: <a href='https://t.me/{bot_name}' target='_blank'>{bot_name}</a></p>
+                    
+                    <div class='commands'>
+                        <h3>Bot Commands</h3>
+                        <ul>
+                            <li><b>/start</b>: Start interacting with the bot</li>
+                            <li><b>/help</b>: Get help and instructions</li>
+                        </ul>
+                    </div>
 
-        <button class="btn" onclick="alert('This is a placeholder for bot interaction')">Interact with Bot</button>
-    </div>
+                    <button class='btn' onclick='alert("This is a placeholder for bot interaction")'>Interact with Bot</button>
+                </div>
 
-    <div class="footer">
-        <p>Learn more about how Telegram bots work with HTML, CSS, and JS.</p>
-    </div>
-</body>
-</html>
-"""
+                <div class='footer'>
+                    <p>Learn more about how Telegram bots work with HTML, CSS, and JS.</p>
+                </div>
+            </body>
+            </html>
+            '''
 
-# Write the HTML content to index.html
-with open('index.html', 'w') as file:
-    file.write(html_content)
+            # Write the HTML content to index.html
+            with open('index.html', 'w') as file:
+                file.write(html_content)
 
-print('index.html has been generated and saved.')
-"
-          
+            print('index.html has been generated and saved.')
+          "
+
       # Step 5: Update README.md with Bot Info and Explanation of Bot Interaction
       - name: Update README.md with Bot Info and Commands
         run: |
@@ -191,5 +147,5 @@ print('index.html has been generated and saved.')
       - name: Run Bot (Optional)
         run: |
           echo "Starting the bot..."
-          # Replace with the actual script to run your bot if necessary
-          # python bot_script.py  # Example to run your bot
+          # Replace with the actual script to run your bot
+          # python bot_script.py  # Example to run your bot script
